@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>小黄狗</title>
+    <!-- build:css ../css/main.css -->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- endbuild -->
+    <!-- build:css ../css/download.css -->
+    <link rel="stylesheet" href="../css/download.css">
+    <!-- endbuild -->
+    <!-- build:js ../js/lib/adapt.js -->
+    <script src="../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+
+
+</head>
+
+<body class="bg-grey">
+    <div class="content content-download">
+        <figure class="logo-download"></figure>
+        <figure class="text"></figure>
+        <button class="btn" id="btn_download"><i class="icon-download"></i>免费下载APP</button>
+        <figure class="box"></figure>
+    </div>
+</body>
+<!-- build:js ../js/lib/fastclick-jquery.js -->
+<script src="../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script>
+(function() {
+    FastClick.attach(document.body);
+    $('#btn_download').on('click', function(e) {
+        var url = ''
+        if (Util.isIosPlatform()) {
+            // 暂时放蒲公英的下载地址，以后改成appstore的
+            url = 'https://itunes.apple.com/cn/app/id1364826345'; // appstore下载地址
+            // url = 'https://www.pgyer.com/efVs'; // 蒲公英下载地址
+        } else {
+            var type = Util.getParam('type');
+            switch (type) {
+                case 'weixin':
+                    url = 'https://www.xhg.com/apk/ydog_weixin.apk';
+                    break;
+                case 'xhgcom':
+                    url = 'https://www.xhg.com/apk/app-release_ydog_updateinapp.apk';
+                    break;
+                case 'updateinapp':
+                    url = 'https://www.xhg.com/apk/app-release_ydog_updateinapp.apk';
+                    break;
+                default:
+                    url = 'https://www.xhg.com/apk/ydog_machine.apk';
+            }
+        }
+        window.location.href = url;
+    })
+
+})();
+
+</script>
+
+</html>

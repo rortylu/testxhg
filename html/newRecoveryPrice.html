@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+		<meta name="format-detection" content="telephone=no">
+		<title>取货价格表</title>
+		<!-- build:css ../css/main.css -->
+		<link rel="stylesheet" href="../css/index.css">
+		<!-- endbuild -->
+		<!-- build:css ../css/newRecoveryPrice.css -->
+		<link rel="stylesheet" href="../css/newRecoveryPrice.css">
+		<!-- endbuild -->
+		<!-- build:js ../js/lib/adapt.js -->
+		<script src="../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+		<!-- endbuild -->
+
+	</head>
+
+	<body class="bg-grey">
+      <div class="new_recovery_price_wrap">
+          <p class="price_title">今天最新回收价格如下：</p>
+          <div class="new_recovery_price">
+              <div class="type_price">
+                  <div class="span_1">
+                      <span>类型</span>
+                      <span class="span_2">单价</span>
+                  </div>
+              </div>
+              <div class="list_content">
+                  <ul id="ulId">
+
+                  </ul>
+              </div>
+          </div>
+          <p class="price_tip">玻璃及有害垃圾为公益回收品类，取货将不计算费用。</p>
+      </div>
+		<div class="fonter_cl">
+			<!--<div class="txt">-->
+				<!--<p>玻璃及有害垃圾为公益回收品类</p>-->
+				<!--<p>投递将不计算环保金收入</p>-->
+			<!--</div>-->
+		</div>
+
+	</body>
+	<!-- build:js ../js/lib/fastclick-jquery.js -->
+	<script src="../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
+	<!-- endbuild -->
+	<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		(function() {
+//			document.body.style.height = window.screen.height + 'px';
+			var token = Util.getParam('token') || "0641E667E73A1779EF83CFA8E4CF596F",
+				appVersion = Util.getParam('appVersion') || "1.1.5",
+				configVersion = Util.getParam('configVersion') || "1.1.0",
+				ostype = Util.getParam('ostype') || "ANDROID",
+				channel = Util.getParam('channel') || "wx",
+				phoneModel = Util.getParam('phoneModel') || "华为P20";
+			FastClick.attach(document.body);
+			var imgPath = ['../images/newRecoveryPrice/r1.png', '../images/newRecoveryPrice/r3.png', '../images/newRecoveryPrice/r2.png', '../images/newRecoveryPrice/r4.png', '../images/newRecoveryPrice/r5.png', '../images/newRecoveryPrice/r6.png', '../images/newRecoveryPrice/r7.png'];
+			Util.Ajax({
+				url: Util.OPENAPI + '/merchant/v1.0/machine/price-list',
+				type: 'POST',
+				data: {},
+				dataType: 'json',
+				requestHead: {
+					"token": token,
+					"appVersion": appVersion,
+					"configVersion": configVersion,
+					"ostype": ostype,
+					"channel": channel,
+					"phoneModel": phoneModel
+				},
+				contentType: "application/json;charset=utf-8",
+				cbOk: function(data, textStatus, jqXHR) {
+//					console.log(data);
+					if(data.responseBody.code == "1") {
+						var _data = data.responseBody.data;
+						if(!_data) {
+							return;
+						}
+						var _temp = '',
+							ulId = $('#ulId');
+						if(_data && _data.length > 0) {
+							for(var i = 0; i < _data.length; i++) {
+								var _item = _data[i];
+								var priceType = _item.priceType == 2?'个':'公斤';
+								var priceData = "";
+								if(!_item.priceExplain){
+									priceData = '<div class="right_cl">'+  _item.price  + " " + '元' + ' ' + '/' + ' ' + priceType  + '</div>'
+								}else{
+									priceData =  '<div class="right_cl">'+  _item.priceExplain + '</div>'
+								}
+								_temp += '<li data-code="' + _item.type + '" data-name="' + _item.name + '">'+
+								'<div class="'+ i +' left_cl">'+'<img src= "'+ imgPath[i] +'" />' + '<span>' + _item.name + '</span>' + '</div>' +
+								priceData +
+								'</li>'
+							}
+							ulId.html(_temp)
+						}
+
+					}
+				},
+				cbErr: function(e, xhr, type) {
+					Util.toast('请求出错，请稍后再试！', 3000);
+				},
+				cbCp: function(xhr, status) {
+					//					isLogining = false;
+				}
+			});
+
+		})();
+	</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>建议与反馈</title>
+    <!-- build:css ../css/main.css -->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- endbuild -->
+     <!-- build:css ../css/components.css -->
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- endbuild -->
+    <!-- build:css ../css/feedback.css -->
+    <link rel="stylesheet" href="../css/feedback.css">
+    <!-- endbuild -->
+    <!-- build:js ../js/lib/adapt.js -->
+    <script src="../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+</head>
+<body>
+    <div class="content content-feedback">
+        <section class="sec-top">
+          <p>欢迎您成为小黄狗的朋友！小黄狗回收现正火热公测中，作为种子用户，我们非常珍视您的建议和反馈：</p>
+        </section>
+        <section class="sec-feedback">
+            <textarea name="input-feedback" id="feedback" placeholder="新功能建议、用得不爽要吐槽、跟产品经理聊聊人生…  都在这里畅所欲言吧～"></textarea>
+            <div class="counting"><span id="num">0</span>/300</div>
+            <ul class="list-img">
+                <!-- <li><img src="../images/booking/bg_booking.jpg" alt=""><i class="icon-del"></i></li>
+                <li><img src="../images/booking/bg_booking.jpg" alt=""><i class="icon-del"></i></li>
+                <li><img src="../images/booking/bg_booking.jpg" alt=""><i class="icon-del"></i></li> -->
+                <li class="item-add"><input id="add_img" type="file" accept="image/*"  capture="camera" /></li>
+            </ul>
+            <div class="tip">可上传最多4张图片</div>
+        </section>
+        <section class="sec-tel">
+            <p>您可留下电话号码以便我们跟进反馈：</p>
+            <input type="tel" name="tel" id="tel" placeholder="输入手机号(选填)" maxlength="11">
+        </section>
+        <button class="btn unabled" id="btn_feedback">提交反馈</button>
+    </div>
+</body>
+<!-- build:js ../js/lib/fastclick-jquery.js -->
+<script src="../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/lrz/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/feedback.js" type="text/javascript" charset="utf-8"></script>
+</html>

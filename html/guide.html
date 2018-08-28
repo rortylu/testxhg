@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>小黄狗</title>
+    <!-- build:css ../css/main.css -->
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- endbuild -->
+    <!-- build:css ../css/guide.css -->
+    <link rel="stylesheet" href="../css/guide.css">
+    <!-- endbuild -->
+    <!-- build:js ../js/lib/adapt.js -->
+    <script src="../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+</head>
+
+<body class="bg-grey">
+    <div class="content content-guide">
+        <ul class="list-guide">
+            <li class="step left">
+                <i class="step1"></i>
+                <div class="info">
+                    <h1>第一步</h1>
+                    <p>找到附近的[小黄狗回收机]</p>
+                </div>
+            </li>
+            <li class="step right">
+                <i class="step2"></i>
+                <div class="info">
+                    <h1>第二步</h1>
+                    <p>点击屏幕“我要投递”按钮，选择您要投递的物品品类</p>
+                </div>
+            </li>
+            <li class="step left">
+                <i class="step3"></i>
+                <div class="info">
+                    <h1>第三步</h1>
+                    <p>用小黄狗APP扫描屏幕的二维码，或者输入手机号打开箱门</p>
+                </div>
+            </li>
+            <li class="step right">
+                <i class="step4"></i>
+                <div class="info">
+                    <h1>第四步</h1>
+                    <p>将物品投入回收箱。如果还有其他品类的物品需要投递，可以在屏幕上选择“继续投递”</p>
+                </div>
+            </li>
+            <li class="step left">
+                <i class="step5"></i>
+                <div class="info">
+                    <h1>第五步</h1>
+                    <p>投递完成后，请在屏幕上点击“结束投递”，回收机将会统计你投递的物品重量及数量</p>
+                </div>
+            </li>
+            <li class="step right">
+                <i class="step6"></i>
+                <div class="info">
+                    <h1>第六步</h1>
+                    <p>打开APP，就可以查看此次投递废品获得的收入啦！</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="../js/jsbridge.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+(function() {
+    if(!window.Bridge.isAPP()) {
+        return;
+    }
+    window.Bridge.callHandler('initShareData', {    
+        "isShowShareButton": "true",
+        "shareTitle": "垃圾真的能变钱！",
+        "shareUrl": window.location.href,
+        "shareIconUrl": "http://psrecycle.oss-cn-hangzhou.aliyuncs.com/recycle/idcard/20180423/408196220EFE043B78096E4C3C021039F08565F753256B953A7A1966BF4D004C",
+        "shareContent": "最新的智能垃圾分类回收机，垃圾换钱的正确姿势"
+    }, function(data) {
+        console.log(data);
+    })
+})();
+
+</script>
+
+</html>

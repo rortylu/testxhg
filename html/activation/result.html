@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>小黄狗</title>
+    <!-- build:css ../../css/main.css -->
+    <link rel="stylesheet" href="../../css/index.css">
+    <!-- endbuild -->
+    <!-- build:css ../../css/activation.css -->
+    <link rel="stylesheet" href="../../css/activation.css">
+    <!-- endbuild -->
+    <!-- build:js ../../js/lib/adapt.js -->
+    <script src="../../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+</head>
+<body>
+    <div class="content content-result">
+        <figure class="icon-success"></figure>
+        <div class="submit_tip">
+            <span id="model_title">工厂模式</span><br/>
+            <span>激活资料提交成功</span>
+        </div>
+        <p>请等待回收机激活，如长时间未激活成功，请重新扫描回收机屏幕上的二维码进行激活</p>
+    </div>
+    <footer class="footer-result">
+        <p>设备ID：<span id="device_id"></span></p>
+        <p>客服电话：400-677-1666</p>
+    </footer>
+</body>
+<!-- build:js ../../js/lib/fastclick-jquery.js -->
+<script src="../../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script src="../../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var modelType=Util.getParam('modelType');
+    $('#device_id').html(Util.getParam('deviceId'));
+    $('#model_title').text(modelType==1?'工厂模式':'投产模式');
+</script>
+</html>
