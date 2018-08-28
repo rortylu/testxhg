@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no"
+    />
+    <meta name="format-detection" content="telephone=no">
+    <title>小黄狗投递方式指引</title>
+    <!-- build:css ../css/main.css -->
+    <link rel="stylesheet" href="../../css/index.css">
+    <!-- endbuild -->
+    <!-- build:css ../../css/shortLink/linkOne.css-->
+    <link rel="stylesheet" href="../../css/shortLink/linkOne.css">
+    <!-- endbuild -->
+    <!-- build:css ../css/components.css -->
+    <link rel="stylesheet" href="../../css/components.css">
+    <!-- endbuild -->
+    <!-- build:js ../js/lib/adapt.js -->
+    <script src="../../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div class="how_to_pay">
+        <div class="content">
+            <img src="../../images/shortLink/st01.png" alt="" class="st01">
+        </div>
+        <div class="link_btn link_show">
+            <a href="https://www.xhg.com/static-file/html/download.html?type=weixin" class="to_app_link">下载小黄狗APP</a>
+            <button class="close_btn" id="close_btn"></button>
+        </div>
+        <a href="https://www.xhg.com/static-file/html/download.html?type=weixin" class="to_app_two"></a>
+    </div>
+
+</body>
+<!-- build:js ../js/lib/fastclick-jquery.js -->
+<script src="../../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script src="../../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    (function () {
+        $("#close_btn").click(function () {
+            $(".link_btn").removeClass('link_show').addClass('link_btn_close');
+        })
+    })()
+</script>
+</html>
