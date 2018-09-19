@@ -127,7 +127,7 @@
                 }
             },
             cbErr: function(e, xhr, type) {
-                Util.toast('请求出错，请稍后再试！', 3000);
+                Util.toast('系统维护中，请稍后再试！', 3000);
             },
             cbCp: function(xhr, status) {
                 isGetting = false;
@@ -196,7 +196,7 @@
                 }
             },
             cbErr: function(e, xhr, type) {
-                Util.toast('请求出错，请稍后再试！', 3000);
+                Util.toast('系统维护中，请稍后再试！', 3000);
             },
             cbCp: function(xhr, status) {
                 isSubmitting = false;

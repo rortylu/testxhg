@@ -26,7 +26,7 @@
 
 <body class="bg-grey">
     <div class="content content-activation">
-        <figure id="model_type" class=""></figure>
+        <figure class="logo2"></figure>
         <form class="form-active">
             <div class="item-wrapper">
                 <label>设备ID</label>
@@ -80,52 +80,17 @@
                 <label>小区</label>
                 <input type="text" name="apartment" id="apartment" maxlength="60" placeholder="如：民间金融街/中央财津小区">
             </div>
-            <div class="item-wrapper">
+            <div class="item-wrapper no-border">
                 <label>详细描述</label>
                 <input type="text" name="detail" id="detail" maxlength="60" placeholder="如：1栋大堂(近东莞银行)">
             </div>
-            <div class="item-wrapper batchNo hide">
-                <label>设备生产批次</label>
-                <select name="batchNo" id="batchNo">
-                    <option value="">请选择</option>
-                    <option value="1-528">第1批-528台</option>
-                    <option value="2-1300">第2批-1300台</option>
-                    <option value="3-2400">第3批-2400台</option>
-                    <option value="4-6000">第4批-6000台</option>
-                </select>
-            </div>
-            <div class="item-wrapper scan_code hide">
-                <label>机器铭牌号</label>
-                <input type="search" name="nameplateCode" id="nameplateCode" placeholder="填写机器铭牌号" maxlength="20" oninput="value=value.replace(/[^\w\.\/]/ig,'')">
-                <span class="scan scanQRcode" id="scan_macNo"></span>
-            </div>
-            <div class="item-wrapper scan_code hide">
-                <label>路由器编号</label>
-                <input type="search" name="routerCode" id="routerCode"  placeholder="填写路由器编号" maxlength="20" oninput="value=value.replace(/[^\w\.\/]/ig,'')">
-                <span class="scan scanQRcode"></span>
-            </div>
-            <div class="item-wrapper scan_code hide">
-                <label>录像机编号</label>
-                <input type="search" name="cameraCode" id="cameraCode" placeholder="填写安防录像机编号" maxlength="20" oninput="value=value.replace(/[^\w\.\/]/ig,'')">
-                <span class="scan scanQRcode"></span>
-            </div>
-            <div class="item-wrapper scan_code no-border hide">
-                <label>视觉工控机</label>
-                <input type="search" name="ipcCode" id="ipcCode" placeholder="填写视觉工控机编号" maxlength="20" oninput="value=value.replace(/[^\w\.\/]/ig,'')">
-                <span class="scan scanQRcode"></span>
-            </div>
-
             <button id="btn_submit" class="btn unabled">提交资料激活</button>
         </form>
     </div>
     <!-- 定位弹层 -->
     <div class="popup-location">
-        <i class="close"></i>
-        <div class="confirm_postion">确认</div>
-        <div class="popup-location" id="container">
-        </div>
+        <!-- <iframe id="location" src="https://m.amap.com/picker/?center=116.3972,39.9696&amp;key=7239636fdf5584e2afacfae18236ac5b"></iframe> -->
     </div>
-    <div style="clear: both"></div>
 </body>
 <!-- build:js ../../js/lib/fastclick-jquery.js -->
 <script src="../../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
@@ -138,8 +103,7 @@
 <script src="../../js/sha256.min.js" type="text/javascript" charset="utf-8"></script>
 <!-- endbuild -->
 <script src="../../js/util.js" type="text/javascript" charset="utf-8"></script>
-<script src="//webapi.amap.com/maps?v=1.3&key=1589997d1cb98dc870c643c5b8e05677&plugin=AMap.ToolBar"></script>
-<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.10"></script>
-<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="//webapi.amap.com/maps?v=1.3&key=1589997d1cb98dc870c643c5b8e05677"></script>
 <script src="../../js/activation/activation.js" type="text/javascript" charset="utf-8"></script>
+
 </html>

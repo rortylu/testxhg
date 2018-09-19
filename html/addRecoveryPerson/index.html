@@ -35,11 +35,32 @@
         </section>
     </div>
     <footer class="footer">
-        <a class="btn-gray" href="javascript:;">名额已满，敬请期待~</a>
+        <a class="btn-common" href="./signup.html">我要报名</a>
     </footer>
 </body>
 <!-- build:js ../../js/lib/fastclick-jquery.js -->
 <script src="../../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
 <!-- endbuild -->
+<!-- build:js ../../js/encode.js -->
+<script src="../../js/md5.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/sha256.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script type="text/javascript">
+(function() {
+    if (window.Bridge.isAPP() && window.Bridge.isAPP2b()) {
+        window.Bridge.callHandler('initShareData', {    
+            "isShowShareButton": "true",
+                "shareTitle": "和我一起加入小黄狗回收员吧",
+                "shareUrl": window.location.href,
+                "shareIconUrl": "http://psrecycle.oss-cn-hangzhou.aliyuncs.com/recycle/idcard/20180514/13154ED585D621937F4F38C97AA82DEE72EC36E2597D0D44EBA2040E7784D5DE",
+                "shareContent": "加入小黄狗回收员，让垃圾回收更轻松简单"
+        }, function(data) {
+            console.log(data);
+        })
+    }
+
+})();
+
+</script>
 
 </html>

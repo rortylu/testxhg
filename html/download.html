@@ -24,7 +24,7 @@
     <div class="content content-download">
         <figure class="logo-download"></figure>
         <figure class="text"></figure>
-        <button class="btn" id="btn_download"><i class="icon-download"></i>免费下载APP</button>
+        <button class="btn" id="btn_download" sensors-name="免费下载APP"><i class="icon-download"></i>免费下载APP</button>
         <figure class="box"></figure>
     </div>
 </body>
@@ -32,6 +32,15 @@
 <script src="../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
 <!-- endbuild -->
 <script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+<!-- build:js ../js/sensorsdata.config.js -->
+<script src="../js/sensorsdata.config.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<!-- build:js ../js/lib/sensorsdata.min.js -->
+<script src="../../../lib/sensorsdata.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- endbuild -->
+<script type="text/javascript" charset="utf-8"> 
+    sa.quick('autoTrack');
+</script>
 <script>
 (function() {
     FastClick.attach(document.body);
@@ -57,9 +66,27 @@
                     url = 'https://www.xhg.com/apk/ydog_machine.apk';
             }
         }
-        window.location.href = url;
-    })
+        jumpUrl(url, e, 'download');    
 
+       // window.location.href = url;
+    });
+
+
+    function jumpUrl(url, e, clickName) { //跳转链接,点击的对象,定义的埋点点击事件名
+        var _this = this;
+        e.preventDefault();   // 阻止默认跳转
+        var hasCalled = false;
+        setTimeout(track_a_click, 400);  //如果没有回调成功,设置超时回调
+        function track_a_click() {
+            if (!hasCalled) {
+                hasCalled = true;
+                location.href = url; //点击完跳转
+            }
+        }
+        sa.track(clickName, { name: $(e.target).attr('sensors-name') }, track_a_click); //把跳转操作加在callback里 
+    }
+
+   
 })();
 
 </script>

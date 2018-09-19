@@ -1,19 +1,20 @@
 (function(global) {
-	//	var openApi = 'http://219.134.241.202:8010/zsd/customer';/*C端联调地址 周仕冬*/
-//	var openApi = 'http://10.10.10.86:8085'; /*加盟商联调地址    捐哥*/
-//	var openApi = 'http://10.10.10.95:8080/qc'; /*加盟商联调地址*/
-	//  var openApi = 'http://10.10.10.95:8082/merchant'; // 联调后端地址
-		//  var openApi = 'http://test.xhg.com:8010'; // test环境
-	// var openApi = 'https://test2.xhg.com:8011'; // test环境
-	// var openApi = 'https://dev.xhg.com:8011'; // 测试环境
-		 var openApi = 'https://pre.xhg.com'; // 预发布环境
-	//	 var openApi = 'https://www.xhg.com'; // 生产环境
-	// var openApi = 'https://xcx.xhg.com'; // 小程序环境
-    // var openApi='http://10.10.10.199:8081'
+	
+	var apis={
+		zhoushidong:'http://10.10.10.230:8022', //周仕东
+		cDev:'http://10.10.10.214:8080', //c端联调环境
+		dev:'https://dev.xhg.com:8011', // 联调
+		test:'https://test.xhg.com:8011', // 测试
+		test2:'https://test2.xhg.com:8011', // 测试2
+		test3:'https://test3.xhg.com:8011', // 测试3
+		test4:'https://test4.xhg.com:8011', // 测试4
+		pre:'https://pre.xhg.com', // 预发
+		prod:'https://www.xhg.com', // 生产
+		liutao:'http://10.10.13.165:8080', //刘涛
+		testN:'https://testn.xhg.com:8080',
+	}
+	var openApi = apis.dev;//后端开发环境---------------
 	var Util = {
-        AppID:'wx3e8a13cc8a84e1b4',//微信公众号id
-        AppSecret:'4af81abe5d5bc78da7a28e77e4109350',//密码
-        AppUrl:'https://pre.xhg.com/static/html/activation/activation.html',//调用微信接口的页面
 		/**
 		 * @func
 		 * @desc toast提示
@@ -172,14 +173,14 @@
 						// "deviceId": "heyb4s3x3l8",
 						"deviceId": me.getParam('deviceId'),
 						"appId": "oa1k92hmx4",
-						"appVersion": "pu3sz68eei8",
+						"appVersion": "1.0.5",
 						"configVersion": "84dltxt0gn",
 						"systemVersion": "lzvv4ixpnq",
 						"ostype": "ANDROID",
 						"channel": 1,
 						// "sign": "63chnz0k3sj",
 						"sign": sha256 ? me.sign(sha256, config.data) : '',
-						"token": "liyn2yvemm",
+						"token":"60524913bcaff66befb7aaad0a4f9da43f868e9e6568c0536eedc2e62ac258ad3c3fa3e51721168120157b28ca705758",
 						"phoneModel": "华为P20",
 						"phoneResolution": ''
 					},
@@ -242,7 +243,7 @@
 		//从url地址获取参数
 		getParam: function(name) {
 			var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");　　
-			if(reg.test(location.href)) {
+			if (reg.test(decodeURIComponent(location.href))) {
 				window["url_" + name] = unescape(RegExp.$2.replace(/\+/g, " ")).split("#")[0];
 				return unescape(RegExp.$2.replace(/\+/g, " "));
 			} else {
@@ -260,6 +261,70 @@
 			}
 			return total % 10 == 0;
 		},
+        /***时间戳转日期***/
+        timestampToTime:function(timestamp,format) {
+            var date = new Date(timestamp * 1000),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            Y = date.getFullYear() + '-',
+            M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
+            D = date.getDate() + ' ',
+            h = date.getHours() + ':',
+            m = date.getMinutes() + ':',
+            s = date.getSeconds();
+            if(format=='yyy-mm-dd'){
+                return Y+M+D+h;
+            }
+            else{
+                return Y+M+D+h+m+s;
+            }
+        },
+        /********上拉加载************/
+        loadMore:function (options) {
+            var defaults={
+                range:80, /**距下边界长度/单位px**/
+                totalheight:0,
+                scollif:true,
+                callback:null
+            }
+            defaults=$.extend({},defaults,options);
+            //滚动条距顶部距离(页面超出窗口的高度)
+            var srollPos = $(window).scrollTop();
+            defaults.totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            //判断上拉的高度以决定是否加载更多
+            if(($(document).height()-defaults.range) <= defaults.totalheight) {
+                if(defaults.scollif){
+                    Util.showLoader();
+                    setTimeout(function () {
+                        alert(1)
+                        defaults.callback&&defaults.callback.call(defaults.obj)(defaults.pageParam);
+                        alert(2)
+                        Util.hideLoader();
+                    },1000)
+
+                }else {
+                    Util.hideLoader();
+                }
+            }
+        },
+        //cookie字符串转对象
+        cookieToObj:function (cookieStr) {
+            var obj={};
+            if(cookieStr){
+                var keyArr=cookieStr.split(';');
+                for(var i=0;i<keyArr.length;i++){
+                    var valArr=keyArr[i].split('=');
+                    obj[$.trim(valArr[0])]=valArr[1];
+                }
+            }
+            return obj;
+        },
+        //校验是否全是中文英文数字
+        verifyInputZYS:function(val){
+        	var regex=/[^\w\u4E00-\u9FA5]/g;
+        	if(val){
+        		return regex.test(val)
+        }
+        	return false;
+	}
 	}
 
 	global.Util = Util;

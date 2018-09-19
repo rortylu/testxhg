@@ -1,47 +1,83 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" />
 		<meta name="format-detection" content="telephone=no">
-		<title>取货价格表</title>
+		<title>最新回收价格</title>
 		<!-- build:css ../css/main.css -->
 		<link rel="stylesheet" href="../css/index.css">
 		<!-- endbuild -->
+        <!-- build:css ../css/components.css -->
+        <link rel="stylesheet" href="../css/components.css">
+        <!-- endbuild -->
 		<!-- build:css ../css/newRecoveryPrice.css -->
 		<link rel="stylesheet" href="../css/newRecoveryPrice.css">
 		<!-- endbuild -->
 		<!-- build:js ../js/lib/adapt.js -->
 		<script src="../../../lib/adapt.js" type="text/javascript" charset="utf-8"></script>
 		<!-- endbuild -->
-
 	</head>
 
-	<body class="bg-grey">
-      <div class="new_recovery_price_wrap">
-          <p class="price_title">今天最新回收价格如下：</p>
-          <div class="new_recovery_price">
-              <div class="type_price">
-                  <div class="span_1">
-                      <span>类型</span>
-                      <span class="span_2">单价</span>
-                  </div>
-              </div>
-              <div class="list_content">
-                  <ul id="ulId">
+	<body>
+		<div class="new_recovery_price">
+			<div class="location">
+				<span class="icon_location"><i class="icon"></i>定位失败，无法获取最新回收价格，请</span>
+				<span class="btn_getLocation">点击重试</span>
+			</div>
+			<div class="list_content">
+                <div class="item_title">有偿回收</div>
+                <div class="col_item clearfix">
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r1.png" alt="">
+                        <p class="item_name" id="item_name0">饮料瓶</p>
+                        <p class="item_price" id="price_type0">--/</p>
+                    </div>
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r2.png" alt="">
+                        <p class="item_name" id="item_name2">纸类</p>
+                        <p class="item_price" id="price_type2">--/</p>
+                    </div>
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r3.png" alt="">
+                        <p class="item_name" id="item_name1">纺织物</p>
+                        <p class="item_price" id="price_type1">--/</p>
+                    </div>
+                </div>
+                <div class="col_item clearfix">
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r4.png" alt="">
+                        <p class="item_name" id="item_name3">金属</p>
+                        <p class="item_price" id="price_type3">--/</p>
+                    </div>
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r5.png" alt="">
+                        <p class="item_name" id="item_name4">塑料</p>
+                        <p class="item_price" id="price_type4">--/</p>
+                    </div>
 
-                  </ul>
-              </div>
-          </div>
-          <p class="price_tip">玻璃及有害垃圾为公益回收品类，取货将不计算费用。</p>
-      </div>
+                </div>
+                <div class="item_title">公益回收</div>
+                <div class="col_item clearfix">
+                    <!-- <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r7.png" alt="">
+                        <p class="item_name" id="item_name6">有害垃圾</p>
+                        <p class="item_price" id="price_type6">公益</p>
+                    </div> -->
+                    <div class="list_item">
+                        <img src="../images/newRecoveryPrice/r6.png" alt="">
+                        <p class="item_name" id="item_name5">玻璃</p>
+                        <p class="item_price" id="price_type5">公益</p>
+                    </div>
+                </div>
+
+			</div>
+		</div>
 		<div class="fonter_cl">
-			<!--<div class="txt">-->
-				<!--<p>玻璃及有害垃圾为公益回收品类</p>-->
-				<!--<p>投递将不计算环保金收入</p>-->
-			<!--</div>-->
+			<div class="txt">
+				<p>各品类回收价格将根据地区动态调整</p>
+			</div>
 		</div>
 
 	</body>
@@ -49,68 +85,164 @@
 	<script src="../../../lib/fastclick-jquery.js" type="text/javascript" charset="utf-8"></script>
 	<!-- endbuild -->
 	<script src="../js/util.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//webapi.amap.com/maps?v=1.3&key=1589997d1cb98dc870c643c5b8e05677&plugin=AMap.Geocoder,AMap.CitySearch"></script>
 	<script>
 		(function() {
-//			document.body.style.height = window.screen.height + 'px';
-			var token = Util.getParam('token') || "0641E667E73A1779EF83CFA8E4CF596F",
-				appVersion = Util.getParam('appVersion') || "1.1.5",
-				configVersion = Util.getParam('configVersion') || "1.1.0",
-				ostype = Util.getParam('ostype') || "ANDROID",
-				channel = Util.getParam('channel') || "wx",
-				phoneModel = Util.getParam('phoneModel') || "华为P20";
 			FastClick.attach(document.body);
 			var imgPath = ['../images/newRecoveryPrice/r1.png', '../images/newRecoveryPrice/r3.png', '../images/newRecoveryPrice/r2.png', '../images/newRecoveryPrice/r4.png', '../images/newRecoveryPrice/r5.png', '../images/newRecoveryPrice/r6.png', '../images/newRecoveryPrice/r7.png'];
-			Util.Ajax({
-				url: Util.OPENAPI + '/merchant/v1.0/machine/price-list',
-				type: 'POST',
-				data: {},
-				dataType: 'json',
-				requestHead: {
-					"token": token,
-					"appVersion": appVersion,
-					"configVersion": configVersion,
-					"ostype": ostype,
-					"channel": channel,
-					"phoneModel": phoneModel
-				},
-				contentType: "application/json;charset=utf-8",
-				cbOk: function(data, textStatus, jqXHR) {
-//					console.log(data);
-					if(data.responseBody.code == "1") {
-						var _data = data.responseBody.data;
-						if(!_data) {
-							return;
-						}
-						var _temp = '',
-							ulId = $('#ulId');
-						if(_data && _data.length > 0) {
-							for(var i = 0; i < _data.length; i++) {
-								var _item = _data[i];
-								var priceType = _item.priceType == 2?'个':'公斤';
-								var priceData = "";
-								if(!_item.priceExplain){
-									priceData = '<div class="right_cl">'+  _item.price  + " " + '元' + ' ' + '/' + ' ' + priceType  + '</div>'
-								}else{
-									priceData =  '<div class="right_cl">'+  _item.priceExplain + '</div>'
-								}
-								_temp += '<li data-code="' + _item.type + '" data-name="' + _item.name + '">'+
-								'<div class="'+ i +' left_cl">'+'<img src= "'+ imgPath[i] +'" />' + '<span>' + _item.name + '</span>' + '</div>' +
-								priceData +
-								'</li>'
-							}
-							ulId.html(_temp)
-						}
+            var cookieObj=Util.cookieToObj(document.cookie);
+			var thisPage={
+			    init:function () {
+			        //一些默认参数
+			        this.param={
+                        token:Util.getParam('token') || "f26cd756c6c95d26a978884cb661e6a75fb9ce198a62f7fb3f5d58970a5ebc7b73b2aa2dfd48c1d888e17fdaddc8eb25",
+                        appVersion:Util.getParam('appVersion') || "1.1.5",
+                        configVersion:Util.getParam('configVersion') || "1.1.0",
+                        ostype:Util.getParam('ostype') || "ANDROID",
+                        channel:Util.getParam('channel') || "wx",
+                        phoneModel:Util.getParam('phoneModel') || "华为P20"
+                    }
+                    this.getLocation(cookieObj.xhgLat);
+			        this.addEvent();
+                },
+                getLocation:function (latStr) {
+			        var _this=this;
+                    Util.showLoader();
+			        //通过经纬度定位
+                    if(latStr){ //如果丛cookie中拿到位置
+                        _this.getGPS(latStr,function(city) {
+                            if(city){ //如果通过经纬度定位到了
+                                $('.location').hide();
+                                _this.getPriceList(city)
+                            }
+                            else {
+                                _this.getLocationByIp(function(citys){
+                                    $('.location').hide();
+                                    _this.getPriceList(citys)
+                                });
+                            }
+                        });
+                    }
+                    else{
+                        _this.getLocationByIp(function(citys){
+                            $('.location').hide();
+                            _this.getPriceList(citys)
+                            // setTimeout(Util.hideLoader(),3000);
+                        });
+                    }
+                },
+                //通过金纬度获取定位
+                getGPS:function(locationStr,cb){
+                    var geocoder = new AMap.Geocoder({
+                        radius: 1000,
+                        extensions: "all"
+                    });
+                    var locationArr=locationStr.split('|');
+                    geocoder.getAddress([locationArr[0], locationArr[1]], function(status, result) {
+                        if (status === 'complete' && result.info === 'OK') {
+                            var city=result.regeocode.addressComponent.city?result.regeocode.addressComponent.city:result.regeocode.addressComponent.province;
+                            cb && cb(city)
+                            console.log(result.regeocode.addressComponent);
+                        }
+                        else{
+                            setTimeout(Util.hideLoader,3000);
+                            $('.location').show();
+                        }
+                    });
+                    //解析定位结果
+                    function onComplete(data) {
+                        cb && cb(data);
+                    }
+                    //解析定位错误信息
+                    function onError(data) {
+                        // Util.toast('定位失败');
+                        $('.location').show();
+                    }
+                },
+                //通过Ip获取定位
+                getLocationByIp:function(cb){
+                    //实例化城市查询类
+                    var citysearch = new AMap.CitySearch();
+                    //自动获取用户IP，返回当前城市
+                    citysearch.getLocalCity(function(status, result) {
+                        if (status === 'complete' && result.info === 'OK') {
+                            if (result && result.city) {
+                                var resultCity = result.city;
+                                cb&&cb(resultCity)
+                            }
+                        }
+                        else {
+                            // setTimeout(Util.hideLoader(),3000);
+                            $('.location').show();
+                        }
+                    });
+                },
+                getPriceList:function (cityName) {
+			        var _this=this;
+                    Util.Ajax({
+                        url: Util.OPENAPI + '/customer/v1.0/notice/query-notice-info',
+                        type: 'POST',
+                        data: {
+                            cityName:cityName
+                        },
+                        dataType: 'json',
+                        requestHead: {
+                            "token": _this.param.token,
+                            "appVersion": _this.param.appVersion,
+                            "configVersion": _this.param.configVersion,
+                            "ostype": _this.param.ostype,
+                            "channel": _this.param.channel,
+                            "phoneModel": _this.param.phoneModel
+                        },
+                        contentType: "application/json;charset=utf-8",
+                        cbOk: function(data, textStatus, jqXHR) {
+                            if(data.responseBody.code == "1") {
+                                var _data = data.responseBody.data;
+                                if(!_data) {
+                                    return;
+                                }
+                                var _temp = '',
+                                    ulId = $('#ulId');
+                                if(_data && _data.length > 0) {
+                                    for(var i = 0; i < _data.length; i++) {
+                                        var _item = _data[i];
+                                        var priceType = _item.priceType == 2?'个':'公斤';
+                                        $('#item_name'+_item.type).text(_item.name);
+                                        if(_item.priceExplain){
+                                            $('#price_type'+_item.type).text(_item.priceExplain);
+                                        }
+                                        else{
+                                            if(_item.price==-1||!_item.price){
+                                                $('#price_type'+_item.type).text('--/');
+                                            }
+                                            else{
+                                                $('#price_type'+_item.type).text(_item.price+'元/'+priceType);
+                                            }
+                                        }
 
-					}
-				},
-				cbErr: function(e, xhr, type) {
-					Util.toast('请求出错，请稍后再试！', 3000);
-				},
-				cbCp: function(xhr, status) {
-					//					isLogining = false;
-				}
-			});
+                                    }
+                                }
+                                setTimeout(Util.hideLoader,500);
+                            }
+                        },
+                        cbErr: function(e, xhr, type) {
+                            Util.toast('系统维护中，请稍后再试！', 3000);
+                            setTimeout(Util.hideLoader,30000);
+                        },
+                        cbCp: function(xhr, status) {
+                            //					isLogining = false;
+                        }
+                    });
+                },
+                addEvent:function () {
+			        var _this=this;
+                    $('.new_recovery_price').on('click','.btn_getLocation',function () {
+                        _this.getLocation();
+                    })
 
+                }
+            };
+            thisPage.init();
 		})();
 	</script>
 

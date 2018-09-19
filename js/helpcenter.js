@@ -15,7 +15,7 @@
 			"answer": "若您想修改登录绑定的手机号需联系客服人员并按要求提供相关的资料进行手机号更换。"
 		}, {
 			"ques": "5、回收机回收哪些垃圾类型？",
-			"answer": "现在支持的回收类型包括：金属、塑料、纺织物、饮料瓶、纸类、玻璃、有害垃圾；其中您回收金属、塑料、纺织物、饮料瓶和纸类等品类的货物时需要支付相关费用，玻璃与有害垃圾类型您可免费回收。"
+			"answer": "现在支持的回收类型包括：金属、塑料、纺织物、饮料瓶、纸类、玻璃；其中您回收金属、塑料、纺织物、饮料瓶和纸类等品类的货物时需要支付相关费用，玻璃类型您可免费回收。"
 		}, {
 			"ques": "6、回收时存在不符合分类的其他物品如何处理？",
 			"answer": "在回收的过程中若发现回收的货物中有回收品类之外的其他杂物从而影响了货物重量，导致您的订单金额有差异您可与客服人员联系进行沟通。"
@@ -34,7 +34,7 @@
 			"answer": "二维码生成系统将定时维护，在回收机上输入手机号同样可以进行投递。"
 		}, {
 			"ques": "4、回收机支持哪些垃圾类型的投递？",
-			"answer": "现在支持投递的类型包括：塑料瓶、服装及纺织物、废旧金属、塑料垃圾、玻璃、纸制品、有害垃圾（暂不支持有偿投递），具体品类以站点实际情况为准。"
+			"answer": "现在支持投递的类型包括：塑料瓶、服装及纺织物、废旧金属、塑料垃圾、玻璃、纸制品，具体品类以站点实际情况为准。"
 		}, {
 			"ques": "5、严禁投递的物品有哪些？",
 			"answer": "易燃易爆物品、液体、食品等。如投递以上物品，将被追究法律责任。"
@@ -63,8 +63,14 @@
 		} else {
 			$item.addClass('open');
 			if($item[0].id == "item7") {
-				var h = $(document).height() - $(window).height();
-				$(document).scrollTop(h);
+				/*console.log($(document).height());
+				console.log($(window).height());
+				console.log("document.body.clientHeight:", document.body.clientHeight);
+				console.log("window.screen.height:", window.screen.height)*/
+				//				var h = $(document).height() - $(window).height();
+				var h = document.body.clientHeight - window.screen.height;
+				//				document.scrollTop(h);
+				$(window).scrollTop(h);
 			}
 		}
 	})
@@ -91,5 +97,4 @@
 			$('.list-ques').html(_temp);
 		}
 	}
-
 })();

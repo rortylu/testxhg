@@ -34,7 +34,7 @@
 
         // 验证电话号码
         if (!phone.length === 11 || !/^((13|14|15|16|17|18|19)[0-9]{1}\d{8})$/.test(phone)) {
-            Util.toast('请输入正确的账号', 3000);
+            Util.toast('手机号码错误', 3000);
             return;
         }
         if(!/^[0-9a-zA-Z]*$/g.test(password)) {
@@ -59,17 +59,9 @@
                     var _data = data.responseBody.data;
                     if (_data) {
                         // 那么跳转到激活页面
-                        var modelType='1';
-                        if(_data.modelType==1){
-                            window.location.href = './modelchoose.html?deviceId='+deviceId + '&username=' + phone +'&type=2';
-                        }
-                        else if(_data.modelType==2){
-                            window.location.href = './result.html?deviceId='+deviceId+'&modelType=2';
-                        }
-                    }
-                    else{
-                        window.location.href = './modelchoose.html?deviceId='+deviceId + '&username=' + phone +'&type=1';
-                        // window.location.href = './result.html?deviceId='+deviceId;
+                        window.location.href = './activation.html?deviceId='+deviceId + '&username=' + phone;
+                    }else{
+                        window.location.href = './result.html?deviceId='+deviceId;
                     }
                 } else {
                     Util.toast(data.responseBody.message, 3000);
@@ -78,7 +70,7 @@
             },
             cbErr: function(e, xhr, type) {
                 $btnLogin.html('登录');
-                Util.toast('请求出错，请稍后再试！', 3000);
+                Util.toast('系统维护中，请稍后再试！', 3000);
             },
             cbCp: function(xhr, status) {
                 isLogining = false;

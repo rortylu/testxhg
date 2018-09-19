@@ -26,6 +26,20 @@
     }
     /**
      * @func
+     * @desc 原生调用h5
+     * @param {Object} json - 回调参数，json数据
+     */
+    function callNativeHandler(nativeName, data, cb) {
+        var params = {
+            "params": data
+        };
+        typeof cb === 'function' && (__callback = cb);
+        global.location.replace('XHG://native?type=' + nativeName + '&params=' + JSON.stringify(data));
+    }
+
+
+    /**
+     * @func
      * @desc 通过useragent判断是否在app内部
      */
     function isAPP() {
@@ -43,7 +57,8 @@
     var bridge = {
         isAPP: isAPP,
         isAPP2b: isAPP2b,
-        callHandler: callHandler
+        callHandler: callHandler,
+        callNativeHandler: callNativeHandler
     }
     global._callback = _callback;
     global.Bridge = bridge;
